@@ -1,0 +1,7 @@
+package boj;
+
+public class boj_7576 {
+	public static void main(String[] args) {
+		
+	}
+}
