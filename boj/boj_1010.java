@@ -28,9 +28,7 @@ public class boj_1010 {
 			answer[i] = mPn.divide(nFactorial);
 		}
 		for (BigInteger i : answer) {
-			System.out.println(i);			
+			System.out.println(i);
 		}
-		
-		
 	}
 }
