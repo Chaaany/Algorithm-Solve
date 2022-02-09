@@ -2,7 +2,7 @@ package swea;
 
 import java.util.Scanner;
 
-public class Solution_D3_2805_농작물수확하시 {
+public class Solution_D3_2805_농작물수확하기 {
 	static int T;
 	static int M;
 	static int profit;
