@@ -3,7 +3,8 @@ package boj;
 import java.util.Scanner;
 
 
-public class Boj_1592 {
+public class Boj_1592 { 
+//	18분  15초 clear
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt(), M = sc.nextInt(), L = sc.nextInt(), LCD = 0;
