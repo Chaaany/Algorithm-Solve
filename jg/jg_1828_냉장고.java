@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class jg_냉장고_1828 {
+public class jg_1828_냉장고 {
 	static int degrees[][], left= 10001, right= -271, answerDegrees[][], cnt;	
 	static boolean[] available; 
 	public static void main(String[] args) throws IOException {

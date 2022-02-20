@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Boj_2667 {
+public class Boj_2667_bfs {
 	static int N;
 	static int arr[][];
 	static int answerArr[][];
@@ -15,7 +15,6 @@ public class Boj_2667 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N + 2][N + 2];
 		answerArr = new int[N + 2][N + 2];
@@ -36,25 +35,29 @@ public class Boj_2667 {
 			}
 		}
 
-		sb.append(homeNumber - 1).append("\n");
+		System.out.println(homeNumber - 1);
 		Arrays.sort(answer);
 
-		for (int i = answer.length - homeNumber + 1; i < answer.length; i++) {
-			sb.append(answer[i]).append("\n");
+		for (int i = answer.length - homeNumber+1; i < answer.length; i++) {
+			System.out.println(answer[i]);
 		}
-		System.out.print(sb);
 
 	}
 
 	private static void dfs(int r, int c) {
-		if(arr[r][c] == 0) return;
-		arr[r][c] = 0;
+		answerArr[r][c] = homeNumber;
 		answer[homeNumber]++;
-		
-		dfs(r + delta[0][0], c + delta[0][1]);
-		dfs(r + delta[1][0], c + delta[1][1]);
-		dfs(r + delta[2][0], c + delta[2][1]);
-		dfs(r + delta[3][0], c + delta[3][1]);
-}
+		arr[r][c] = 0;
+
+		for (int d = 0; d < 4; d++) {
+			int nr = r + delta[d][0];
+			int nc = c + delta[d][1];
+
+			if (arr[nr][nc] == 1)
+				dfs(nr, nc);
+
+		}
+
+	}
 
 }
