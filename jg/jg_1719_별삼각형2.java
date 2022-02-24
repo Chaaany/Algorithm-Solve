@@ -2,7 +2,7 @@ package jg;
 
 import java.util.Scanner;
 
-public class Boj_1719_별삼각형2 {
+public class jg_1719_별삼각형2 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
