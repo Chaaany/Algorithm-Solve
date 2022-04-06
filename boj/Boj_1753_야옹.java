@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class Boj_1753_PQ {
+public class Boj_1753_야옹 {
 	
 	static class Vertex implements Comparable<Vertex>{
 		int no, distance; 
@@ -57,10 +57,10 @@ public class Boj_1753_PQ {
 		while(!PQ.isEmpty()) {
 			Vertex current = PQ.poll();
 			
-//			if (visited[current.no]) continue;
-//			
-//			visited[current.no] = true;
-			if(current.distance != distance[current.no])continue;
+			if (visited[current.no]) continue;
+			
+			visited[current.no] = true;
+			
 			
 			for (int j = 0; j < adjList[current.no].size(); j++) {
 				Vertex temp = (Vertex)adjList[current.no].get(j);
