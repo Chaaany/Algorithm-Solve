@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 public class Boj_7662 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -17,50 +18,74 @@ public class Boj_7662 {
 		T = Integer.parseInt(br.readLine());
 		StringTokenizer stz;
 		String key;
-		int value, max, min;
 		for (int i = 0; i < T; i++) {
+			int value, max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+			TreeMap<Integer, Integer> tm = new TreeMap<>();
+//			System.out.println("----------------------------");
 			N = Integer.parseInt(br.readLine());
 			for (int j = 0; j < N; j++) {
 				stz = new StringTokenizer(br.readLine());
 				key = stz.nextToken();
 				
 				value = Integer.parseInt(stz.nextToken());
-				if(key.equals("I")) {
+				
+				if(key.equals("I")) { // 숫자 넣기
 					size++;
+					int temp = tm.get(value) == null || tm.get(value) == 0 ? 1 : tm.get(value);
+					tm.put(value, temp);
+//					System.out.println("size : " +size + ", " +key +" : " + value + "=" + value);
 					pqAsc.add(value);
 					pqDesc.add(value);
 				} else {
 					if(size == 0) continue;
+					
 					if(value == -1) { // 최솟값 삭제
-						pqAsc.poll();
 						size--;
+						int temp = pqAsc.poll();
+						tm.put(temp, tm.get(temp)-1);
+//						System.out.println("size : " +size + ", " +key +" : " + value + "=" + pqAsc.poll());
 						if(size == 0) {
-							while(!pqDesc.isEmpty())pqDesc.poll();
+							pqAsc.clear();
+							pqDesc.clear();
 						}
 					}else { // 최댓값 삭제
-						pqDesc.poll();
 						size--;
+						int temp = pqDesc.poll();
+						tm.put(temp, tm.get(temp)-1);
+//						System.out.println("size : " +size + ", " +key +" : " + value + "=" + pqDesc.poll());
 						if(size == 0) {
 							while(!pqAsc.isEmpty())pqAsc.poll();
 						}
 					}
 				}
 			}
-			if(size == 1) {
-				if(pqAsc.size() == 1) {
-					max = pqAsc.poll();
-					min = max;
-				}else if(pqDesc.size() ==1) {
-					max = pqAsc.poll();
-					min = max;
+			
+			if(size >= 1) {
+				while(!pqDesc.isEmpty()) {
+					int temp = pqDesc.poll();
+					if(tm.get(temp)!= 0) {
+						max = temp;
+						break;
+					}
 				}
-			} else if (size == 0) {
-				sb.append("EMPTY").append("\n");
+				
+				while(!pqAsc.isEmpty()) {
+					int temp = pqAsc.poll();
+					if(tm.get(temp)!= 0) {
+						min = temp;
+						break;
+					}
+				}
+				min = min == Integer.MAX_VALUE ? max : min;
+				max = max == Integer.MIN_VALUE ? min : max;
+				
+				sb.append(max +" "+ min).append("\n");
 			} else {
-				sb.append(pqDesc.poll() +" "+ pqAsc.poll()).append("\n");
+				sb.append("EMPTY").append("\n");
 			}
 			pqAsc.clear();
 			pqDesc.clear();
+			size = 0;
 		}
 		System.out.println(sb);
 		
